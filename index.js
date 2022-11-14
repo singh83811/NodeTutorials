@@ -7,7 +7,6 @@
 // console.log( a + b + c )
 // <----------- End ----------->
 
-
 // <----------- Import another file data in Node.js --------------->
 
 // const app = require( './app' )
@@ -32,14 +31,13 @@
 // File System , Buffer , HTTP
 
 // <---------- Global Modules ---------->
-// No need to import 
+// No need to import
 
 // console.log( __dirname );
 // console.log( __filename )
 
-
 // <---------- Non-Global Modules ---------->
-// need to import 
+// need to import
 
 // const fs = require( 'fs' );
 // fs.writeFileSync( 'hello.txt', 'Hello txt file created successfully.' )
@@ -86,7 +84,7 @@
 
 // <--------- Input from Command Line ---------->
 // console.log( process.argv )  // argv means argument vector
-// console.log( process.argv[ 2 ] ) 
+// console.log( process.argv[ 2 ] )
 // const fs = require( 'fs' );
 // const input = process.argv;
 
@@ -165,7 +163,7 @@
 // let a = 10;
 // let b = 0;
 
-// setTimeout( () =>       // Drawback 
+// setTimeout( () =>       // Drawback
 // {
 // 	b = 20;
 // }, 2000 );
@@ -177,7 +175,7 @@
 // let b = 0;
 // let waitingData = new Promise( ( resolve, reject ) =>
 // {
-// 	setTimeout( () =>  
+// 	setTimeout( () =>
 // 	{
 // 		resolve( 30 )
 // 	}, 2000 );
@@ -306,36 +304,72 @@
 // app.listen( 5000 );
 // <---------- End ---------->
 
-// <---------- MiddleWare build and Implentation ----------->
-const express = require( 'express' );
-const app = express();
-const reqFilter = require( './middleWare' );
-const route = express.Router();
+// !<---------- MiddleWare build and Implentation ----------->
+//! const express = require( 'express' );
+//! const app = express();
+//! const reqFilter = require( './middleWare' );
+//! const route = express.Router();
 
+//! route.use( reqFilter );
 
-route.use( reqFilter );
+//! app.get( '/', ( req, resp ) =>
+//! {
+//! 	resp.send( 'Welcome to home page' );
+//! } );
+//! app.get( '/users', reqFilter, ( req, resp ) =>
+//! {
+//! 	resp.send( 'Welcome to users Page' );
+//! } );
+//! app.get( '/users', ( req, resp ) =>
+//! {
+//! 	resp.send( 'Welcome to users Page' );
+//! } );
+//! route.get( '/about', ( req, resp ) =>
+//! {
+//! 	resp.send( 'Welcome to About Page' );
+//! } );
+//! route.get( '/contact', ( req, resp ) =>
+//! {
+//! 	resp.send( 'Welcome to Contact Page' );
+//! } );
 
-app.get( '/', ( req, resp ) =>
-{
-	resp.send( 'Welcome to home page' );
-} );
-// app.get( '/users', reqFilter, ( req, resp ) =>
-// {
-// 	resp.send( 'Welcome to users Page' );
-// } );
-app.get( '/users', ( req, resp ) =>
-{
-	resp.send( 'Welcome to users Page' );
-} );
-route.get( '/about', ( req, resp ) =>
-{
-	resp.send( 'Welcome to About Page' );
-} );
-route.get( '/contact', ( req, resp ) =>
-{
-	resp.send( 'Welcome to Contact Page' );
-} );
+//! app.use( '/', route );
+//! app.listen( 5000 );
+//! <---------- End ---------->
 
-app.use( '/', route );
-app.listen( 5000 );
-// <---------- End ---------->
+// ?<---------- Connect Node with MongoDB ----------->
+
+//? const { MongoClient } = require("mongodb");
+//? const url = "mongodb://?localhost:27017";
+//? const client = new MongoClient(url);
+//? const dataBase = "e-comm";
+
+//? async function getData() {
+//?   let result = await client.connect();
+//?   let db = result.db(dataBase);
+//?   let collection = db.collection("product");
+//?   let response = await collection.find({}).toArray();
+//?   console.log(response);
+//? }
+//? getData();
+// ?<--------- End ----------->
+
+// ! <---------- Make file for DB Connection ---------->
+const { MongoClient } = require("mongodb");
+const url = "mongodb://localhost:27017";
+const client = new MongoClient(url);
+const dataBase = "e-comm";
+
+async function dbConnect() {
+  let result = await client.connect();
+  db = result.db(dataBase);
+  return db.collection('product');
+}
+
+dbConnect().then((resp)=>{
+  resp.find().toArray().then((data)=>{
+    console.log(data)
+  })
+})
+
+// ! <----------- End ----------->
