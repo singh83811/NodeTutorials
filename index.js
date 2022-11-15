@@ -304,7 +304,7 @@
 // app.listen( 5000 );
 // <---------- End ---------->
 
-// !<---------- MiddleWare build and Implentation ----------->
+//! <---------- MiddleWare build and Implentation ----------->
 //! const express = require( 'express' );
 //! const app = express();
 //! const reqFilter = require( './middleWare' );
@@ -355,21 +355,40 @@
 // ?<--------- End ----------->
 
 // ! <---------- Make file for DB Connection ---------->
-const { MongoClient } = require("mongodb");
-const url = "mongodb://localhost:27017";
-const client = new MongoClient(url);
-const dataBase = "e-comm";
+//! const { MongoClient } = require("mongodb");
+//! const url = "mongodb://localhost:27017";
+//! const client = new MongoClient(url);
+//! const dataBase = "e-comm";
 
-async function dbConnect() {
-  let result = await client.connect();
-  db = result.db(dataBase);
-  return db.collection('product');
-}
+//! async function dbConnect() {
+//!   let result = await client.connect();
+//!   db = result.db(dataBase);
+//!   return db.collection('product');
+//! }
 
-dbConnect().then((resp)=>{
-  resp.find().toArray().then((data)=>{
-    console.log(data)
-  })
-})
+//! dbConnect().then((resp)=>{
+//! resp.find({name:'M40'}).toArray().then((data)=>{ //! this is use for specific record
+//!     resp.find().toArray().then((data)=>{
+//!     console.log(data);
+//!   });
+//! });
+
+//? const dbConnect = require('./mongodb');
+
+// ? <-------- Modern Syntax ---------->
+//? const main = async ()=> {
+//?   let data = await dbConnect();
+//?   data = await data.find().toArray();
+//?   console.log(data)
+//? }
+//? main();
+// ? <-------- End ---------->
 
 // ! <----------- End ----------->
+
+
+// * <-------- Insert Data from MongoDb ----------->
+
+
+
+// * <---------- End ----------->
