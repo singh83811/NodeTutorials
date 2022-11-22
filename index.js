@@ -387,8 +387,72 @@
 // ! <----------- End ----------->
 
 
-// * <-------- Insert Data from MongoDb ----------->
 
+// * <======== Start Working with Mongoose ======>
 
+// const mongoose = require('mongoose');
+// const saveInDB = async () => {
+//     await mongoose.connect("mongodb://localhost:27017/e-comm");
+//     const ProductSchema = new mongoose.Schema({
+//         name: String,
+//         price: Number,
+//         brand: String,
+//         category: String
+//     });
+//     const ProductModel = mongoose.model('products', ProductSchema);
+//     let data = new ProductModel({ name: 'M18', price: 15000, brand: 'Samsung', category: 'Mobile' });
+//     let result = await data.save();
+//     console.log(result)
+// }
+// saveInDB();
 
-// * <---------- End ----------->
+// const updateInDB = async () => {
+//     await mongoose.connect("mongodb://localhost:27017/e-comm");
+//     const ProductSchema = new mongoose.Schema({
+//         name: String,
+//         price: Number,
+//         brand: String,
+//         category: String
+//     });
+//     const Product = mongoose.model('products', ProductSchema);
+//     let data = await Product.updateOne(
+//         { name: "M8" },
+//         { $set: { price: 700 } }
+//     )
+//     console.log(data)
+// }
+
+// updateInDB();
+
+// const deleteInDB = async () => {
+//     await mongoose.connect("mongodb://localhost:27017/e-comm");
+//     const ProductSchema = new mongoose.Schema({
+//         name: String,
+//         price: Number,
+//         brand: String,
+//         category: String
+//     });
+//     const Product = mongoose.model('products', ProductSchema);
+//     let data = await Product.deleteOne({ nmae: 'M8' });
+//     console.log(data)
+// }
+
+// deleteInDB();
+
+// const findInDB = async () => {
+//     await mongoose.connect("mongodb://localhost:27017/e-comm");
+//     const ProductSchema = new mongoose.Schema({
+//         name: String,
+//         price: Number,
+//         brand: String,
+//         category: String
+//     });
+//     const Product = mongoose.model('products', ProductSchema);
+//     let data = await Product.find();
+//     console.log(data)
+// }
+
+// findInDB();
+
+// * <======= End =========>
+
