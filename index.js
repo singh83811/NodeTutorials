@@ -456,3 +456,151 @@
 
 // * <======= End =========>
 
+// ? <------------ Make Post API with mongoose ---------->
+
+// const express = require('express');
+// require('./config');
+// const Product = require('./product');
+
+// const app = express();
+// app.use(express.json());
+
+// app.post('/create', async (req, res) => {
+//     let data = new Product(req.body);
+//     let result = await data.save();
+//     console.log(result);
+//     res.send(result);
+// });
+
+// app.get('/list', async (req, res) => {
+//     let data = await Product.find();
+//     res.send(data);
+// });
+
+// app.delete('/delete/:_id', async (req, res) => {
+//     let data = await Product.deleteOne(req.params)
+//     console.log(req.params)
+//     res.send(data)
+// })
+
+// app.put('/update/:_id', async (req, res) => {
+//     let data = await Product.updateOne(
+//         req.params,
+//         { $set: req.body }
+//     )
+//     console.log(req.params)
+//     res.send(data)
+// })
+
+
+// app.listen(5000);
+
+// ? <------------- End ------------->
+
+// ! <--------- Make search Api with MongoDB --------->
+
+// const express = require('express');
+// const product = require('./product');
+// require('./config');
+// const Product = require('./product');
+// const app = express();
+
+// app.use(express.json());
+
+// app.get("/search/:key", async (req, res) => {
+//     let data = await Product.find(
+//         {
+//             "$or": [
+//                 { "name": { $regex: req.params.key } }
+//             ]
+//         }
+//     );
+
+//     res.send(data)
+// });
+
+
+// app.listen(5000);
+
+// ! <--------- End --------->
+
+// * <------- Upload File in Node Js ---------->
+
+// const express = require('express');
+// const multer = require('multer');
+// const app = express();
+// const upload = multer({
+//     storage: multer.diskStorage({
+//         destination: function (req, file, cb) { //cb stands for call back
+//             cb(null, 'uploads')
+//         },
+//         filename: function (req, file, cb) {
+//             cb(null, file.fieldname + "-" + Date.now() + ".jpg")
+//         }
+//     })
+// }).single("user_file");
+
+// app.post('/upload', upload, (req, res) => {
+//     res.send("file uploaded")
+// });
+
+// app.listen(5000);
+
+//  * <---------- End ------------>
+
+// ? <----------- OS Module in Node.js ---------->
+
+// const os = require('os');
+// console.log(os.arch());
+// console.log(os.freemem()/(1024*1024*1024));
+// console.log(os.totalmem()/(1024*1024*1024));
+// console.log(os.hostname());
+// console.log(os.platform());
+// console.log(os.userInfo());
+
+// ? <---------- End ---------->
+
+// ! <---------- Event and Event Emitter in Node JS ---------->
+
+// const express = require('express');
+// const EventEmitter = require("events");
+// const app = express();
+// const event = new EventEmitter();
+
+// let count = 0;
+
+
+// event.on("countAPI", () => {
+//     count++;
+//     console.log("event called", count)
+// })
+
+// app.get('/', (req, res) => {
+//     res.send("api called");
+//     event.emit("countAPI");
+// });
+
+// app.get('/search', (req, res) => {
+//     res.send("search api called")
+// });
+
+// app.get('/update', (req, res) => {
+//     res.send("update api called")
+// });
+
+// app.listen(5000);
+
+// ! <---------- End ---------->
+
+// * <---------- REPL ---------->
+
+// REPL = stands for read-eval-print-loop
+// it helps to write javascript and node js code in command line 
+// Important commands
+// - enter node in cmd 
+// - after that write code line by line 
+// - and if we enter in editor mode then use command .editor
+
+// * <------------ End ------------>
+
+ 
