@@ -304,7 +304,7 @@
 // app.listen( 5000 );
 // <---------- End ---------->
 
-// !<---------- MiddleWare build and Implentation ----------->
+//! <---------- MiddleWare build and Implentation ----------->
 //! const express = require( 'express' );
 //! const app = express();
 //! const reqFilter = require( './middleWare' );
@@ -355,21 +355,252 @@
 // ?<--------- End ----------->
 
 // ! <---------- Make file for DB Connection ---------->
-const { MongoClient } = require("mongodb");
-const url = "mongodb://localhost:27017";
-const client = new MongoClient(url);
-const dataBase = "e-comm";
+//! const { MongoClient } = require("mongodb");
+//! const url = "mongodb://localhost:27017";
+//! const client = new MongoClient(url);
+//! const dataBase = "e-comm";
 
-async function dbConnect() {
-  let result = await client.connect();
-  db = result.db(dataBase);
-  return db.collection('product');
-}
+//! async function dbConnect() {
+//!   let result = await client.connect();
+//!   db = result.db(dataBase);
+//!   return db.collection('product');
+//! }
 
-dbConnect().then((resp)=>{
-  resp.find().toArray().then((data)=>{
-    console.log(data)
-  })
-})
+//! dbConnect().then((resp)=>{
+//! resp.find({name:'M40'}).toArray().then((data)=>{ //! this is use for specific record
+//!     resp.find().toArray().then((data)=>{
+//!     console.log(data);
+//!   });
+//! });
+
+//? const dbConnect = require('./mongodb');
+
+// ? <-------- Modern Syntax ---------->
+//? const main = async ()=> {
+//?   let data = await dbConnect();
+//?   data = await data.find().toArray();
+//?   console.log(data)
+//? }
+//? main();
+// ? <-------- End ---------->
 
 // ! <----------- End ----------->
+
+
+
+// * <======== Start Working with Mongoose ======>
+
+// const mongoose = require('mongoose');
+// const saveInDB = async () => {
+//     await mongoose.connect("mongodb://localhost:27017/e-comm");
+//     const ProductSchema = new mongoose.Schema({
+//         name: String,
+//         price: Number,
+//         brand: String,
+//         category: String
+//     });
+//     const ProductModel = mongoose.model('products', ProductSchema);
+//     let data = new ProductModel({ name: 'M18', price: 15000, brand: 'Samsung', category: 'Mobile' });
+//     let result = await data.save();
+//     console.log(result)
+// }
+// saveInDB();
+
+// const updateInDB = async () => {
+//     await mongoose.connect("mongodb://localhost:27017/e-comm");
+//     const ProductSchema = new mongoose.Schema({
+//         name: String,
+//         price: Number,
+//         brand: String,
+//         category: String
+//     });
+//     const Product = mongoose.model('products', ProductSchema);
+//     let data = await Product.updateOne(
+//         { name: "M8" },
+//         { $set: { price: 700 } }
+//     )
+//     console.log(data)
+// }
+
+// updateInDB();
+
+// const deleteInDB = async () => {
+//     await mongoose.connect("mongodb://localhost:27017/e-comm");
+//     const ProductSchema = new mongoose.Schema({
+//         name: String,
+//         price: Number,
+//         brand: String,
+//         category: String
+//     });
+//     const Product = mongoose.model('products', ProductSchema);
+//     let data = await Product.deleteOne({ nmae: 'M8' });
+//     console.log(data)
+// }
+
+// deleteInDB();
+
+// const findInDB = async () => {
+//     await mongoose.connect("mongodb://localhost:27017/e-comm");
+//     const ProductSchema = new mongoose.Schema({
+//         name: String,
+//         price: Number,
+//         brand: String,
+//         category: String
+//     });
+//     const Product = mongoose.model('products', ProductSchema);
+//     let data = await Product.find();
+//     console.log(data)
+// }
+
+// findInDB();
+
+// * <======= End =========>
+
+// ? <------------ Make Post API with mongoose ---------->
+
+// const express = require('express');
+// require('./config');
+// const Product = require('./product');
+
+// const app = express();
+// app.use(express.json());
+
+// app.post('/create', async (req, res) => {
+//     let data = new Product(req.body);
+//     let result = await data.save();
+//     console.log(result);
+//     res.send(result);
+// });
+
+// app.get('/list', async (req, res) => {
+//     let data = await Product.find();
+//     res.send(data);
+// });
+
+// app.delete('/delete/:_id', async (req, res) => {
+//     let data = await Product.deleteOne(req.params)
+//     console.log(req.params)
+//     res.send(data)
+// })
+
+// app.put('/update/:_id', async (req, res) => {
+//     let data = await Product.updateOne(
+//         req.params,
+//         { $set: req.body }
+//     )
+//     console.log(req.params)
+//     res.send(data)
+// })
+
+
+// app.listen(5000);
+
+// ? <------------- End ------------->
+
+// ! <--------- Make search Api with MongoDB --------->
+
+// const express = require('express');
+// const product = require('./product');
+// require('./config');
+// const Product = require('./product');
+// const app = express();
+
+// app.use(express.json());
+
+// app.get("/search/:key", async (req, res) => {
+//     let data = await Product.find(
+//         {
+//             "$or": [
+//                 { "name": { $regex: req.params.key } }
+//             ]
+//         }
+//     );
+
+//     res.send(data)
+// });
+
+
+// app.listen(5000);
+
+// ! <--------- End --------->
+
+// * <------- Upload File in Node Js ---------->
+
+// const express = require('express');
+// const multer = require('multer');
+// const app = express();
+// const upload = multer({
+//     storage: multer.diskStorage({
+//         destination: function (req, file, cb) { //cb stands for call back
+//             cb(null, 'uploads')
+//         },
+//         filename: function (req, file, cb) {
+//             cb(null, file.fieldname + "-" + Date.now() + ".jpg")
+//         }
+//     })
+// }).single("user_file");
+
+// app.post('/upload', upload, (req, res) => {
+//     res.send("file uploaded")
+// });
+
+// app.listen(5000);
+
+//  * <---------- End ------------>
+
+// ? <----------- OS Module in Node.js ---------->
+
+// const os = require('os');
+// console.log(os.arch());
+// console.log(os.freemem()/(1024*1024*1024));
+// console.log(os.totalmem()/(1024*1024*1024));
+// console.log(os.hostname());
+// console.log(os.platform());
+// console.log(os.userInfo());
+
+// ? <---------- End ---------->
+
+// ! <---------- Event and Event Emitter in Node JS ---------->
+
+// const express = require('express');
+// const EventEmitter = require("events");
+// const app = express();
+// const event = new EventEmitter();
+
+// let count = 0;
+
+
+// event.on("countAPI", () => {
+//     count++;
+//     console.log("event called", count)
+// })
+
+// app.get('/', (req, res) => {
+//     res.send("api called");
+//     event.emit("countAPI");
+// });
+
+// app.get('/search', (req, res) => {
+//     res.send("search api called")
+// });
+
+// app.get('/update', (req, res) => {
+//     res.send("update api called")
+// });
+
+// app.listen(5000);
+
+// ! <---------- End ---------->
+
+// * <---------- REPL ---------->
+
+// REPL = stands for read-eval-print-loop
+// it helps to write javascript and node js code in command line 
+// Important commands
+// - enter node in cmd 
+// - after that write code line by line 
+// - and if we enter in editor mode then use command .editor
+
+// * <------------ End ------------>
+
+ 
